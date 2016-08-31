@@ -1,0 +1,26 @@
+# top level stuff you probably don't need to touch
+highlighter: pygments
+markdown: rdiscount
+rdiscount:
+  extensions: [smart]
+permalink: /:title.html
+paginate: 5
+gems: [jekyll-paginate]
+port: 3000
+safe: true
+
+# edit here to achieve your personal greatness
+url: http://localhost:3000
+baseurl: /
+title: Oğuzhan KARAASLAN
+author: Oğuzhan KARAASLAN
+description: Personal blog and resume
+avatar: profile.JPG
+email: oguzhan.karaaslann@gmail.com
+github: OguzhanKaraaslan # username
+twitter: oguzhankaraslan
+linkedin: oğuzhan-karaaslan-5abab7105
+stackoverflow: users/6761275/oğuzhan-karaaslan   #e.g: users/2735833/proton1h1
+#Comment out if you don't want disqus
+disqus: o_uzhan_karaaslan
+google_analytics: UA-83204352-1

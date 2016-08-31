@@ -1,0 +1,126 @@
+p{
+	margin-bottom: 0.14in;
+	line-height: 115%;
+	font-family: 'Source Sans Pro', sans-serif;
+
+}
+p.topic{
+	font-weight: bold;
+	font-size: 40pt;
+	text-align: center;
+}
+p.title{
+	text-align: center;
+	font-size: 28pt;
+	font-weight: bold;
+}
+.subtitle{
+  font-size: 14pt;
+  font-weight: bold;
+  color:#e74c3c;
+}
+p.signature{
+	text-align: center;
+	margin-bottom: 5px;
+  font-style: italic;
+	font-size: 28pt;
+}
+br{
+	line-height: 100%;
+}
+p.thank{
+	text-align: center;
+	margin-bottom: 0.14in;
+	line-height: 115%;
+	font-size: 18pt;
+}
+p.content{
+	margin-bottom: 0.14in;
+	line-height: 115%;
+	font-size: 20pt;
+	color: #c0392b;
+	font-weight: bold;
+	text-decoration: underline;
+}
+#title{
+	font-size: 14pt;
+	font-weight: bold;
+}
+#title1{
+  color:#c0392b;
+  font-size: 36pt;
+  font-weight: bold;
+  text-align: center;
+  font-family: "Times New Roman, serif";
+}
+#list{
+	list-style-type:none;
+	font-size: 14pt;
+}
+
+.subject{
+
+
+}
+.image{
+  height: 90%;
+  width: 90%;
+  text-align: center;
+C
+}
+table{
+  width:80%;
+  display: block;
+   margin: 0 auto;
+   font-size: 14pt;
+   margin-bottom: 0.14in;
+   font-family: 'Source Sans Pro', sans-serif;
+}
+
+p#web{
+	font-size: 14pt;
+  margin-bottom: 0.14in;
+  line-height: 140%;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+#t1{
+  text-align: center;
+  display: block;
+   margin: 0 auto;
+}
+#t3{
+  text-align: center;
+  display: block;
+   margin: 0 auto;
+}
+img{
+  display: block;
+   margin: 0 auto;
+}
+ol, ul{
+  font-size: 14pt;
+  margin-bottom: 0.14in;
+  font-family: 'Source Sans Pro', sans-serif;
+    line-height: 140%;
+}
+code{
+	color: #2980b9;
+	text-align: center;
+}
+p.border{
+	border-radius: 5px;
+	border-color:#e74c3c;
+	border-width: thick;
+	margin-top: 5px;
+	border-style: solid;
+	text-align: center;
+}
+ul.protect{
+	list-style-type:disc;
+}
+div.text{
+	font-size: 14pt;
+  margin-bottom: 0.14in;
+  line-height: 140%;
+  font-family: 'Source Sans Pro', sans-serif;
+}
