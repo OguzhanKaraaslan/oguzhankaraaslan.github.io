@@ -101,14 +101,14 @@
 <p>&emsp;VirusTotal ile bunu tespit edebiliriz.Lab01-01.exe ve Lab01-01.dll'i upload edersek:</p>
 </br>
 
-<p><img class="image" src="../static/img/post2_1.jpg"></p>
-<p><img class="image" src="../static/img/post2_2.jpg"></p>
+<p><img class="image" src="../static/img/post2_1.png"></p>
+<p><img class="image" src="../static/img/post2_2.png"></p>
 </p></br>
 <strong>Question 2 - When were these files compiled?</strong>
 <p  class="subject">
 
 <p>&emsp;Bu sorunun cevabı için PEview kullanacağız. .exe ve .dll'yi ayrı ayrı PEview ile açtıktan sonra IMAGE_NT_HEADERS/IMAGE_FILE_HEADER/TimeDateStamp alanına bakmamız gerekiyor. Bu kısım bize dosyaların ne zaman compile edildiğine dair bilgi verir.</p></br>
-<p><img class="image" src="../static/img/post2_3.jpg"></p></br>
+<p><img class="image" src="../static/img/post2_3.png"></p></br>
 <p>&emsp;İki dosya da 19 Aralık 2010'da aynı dakika içerisinde compile edilmiştir. {16:16:19-16:16:38} 
 Compile timelar arasındaki küçük farktan dolayı iki dosyanın da aynı pakete ait olduğunu(birbiriyle ilişkili) ve aynı kişi tarafından oluşturulduğunu anlayabiliriz. Aralarındaki ilişki ise .exe->.dll olmasından kaynaklı. .exe ya .dll'i çalıştıracak ya da başka bir yerde kullanacaktır. Herhangi bir Dynamic-Link Library kendi kendini çalıştıramaz.</p>
 </p>
@@ -119,7 +119,7 @@ Compile timelar arasındaki küçük farktan dolayı iki dosyanın da aynı pake
 <p>&emsp;Açıklamak gerekirse "obfuscated" olması malware author'un kodunu gizleme isteğini, "packed" olması ise sıkıştırılmış olduğu ve analiz edilemeyeceğini gösterir. (Packed ve obfuscated kodlar genellikle "LoadLibrary" ve "GetProcAddress" fonksiyonlarını kullanırlar.) Bu iki teknik de malware'i statik analiz ederken bizi kısıtlar. Soruya cevap verebilmemiz için ise PEiD kullanabiliriz.</p>
 </br>
 
-<p><img class="image" src="../static/img/post2_4.jpg"></p></br>
+<p><img class="image" src="../static/img/post2_4.png"></p></br>
 <p>&emsp;Kodun "Microsoft Visual C++ 6.0" ile compile edildiğini görebiliyoruz böylece "packed" olarak sınıflandırma yapamayız. Yani herhangi bir indication bulunmamakta.</p>
 </p>
 </br>
@@ -128,8 +128,8 @@ Compile timelar arasındaki küçük farktan dolayı iki dosyanın da aynı pake
 <p  class="subject">
 <p>&emsp;Dependency Walker kullanarak .exe ve .dll'de bulunan imported fonksiyonları inceleyebiliriz:</p>
 </br>
-<p><img class="image" src="../static/img/post2_5.jpg"></p></br>
-<p><img class="image" src="../static/img/post2_6.jpg"></p></br>
+<p><img class="image" src="../static/img/post2_5.png"></p></br>
+<p><img class="image" src="../static/img/post2_6.png"></p></br>
 
 <p>&emsp;CreateProcess, FindFirstFile, FindNextFile ve CopyFile fonksiyonları bize soruda bahsedilen ipucunu veriyor. Malware, sistem dosyalarını açabiliyor ve üzerinde değişiklik yapabiliyor.</p>
 </p>
@@ -146,7 +146,7 @@ Compile timelar arasındaki küçük farktan dolayı iki dosyanın da aynı pake
 <p>&emsp;PEview ile Lab01-01.dll de bulunan SECTION.data kısmını incelediğimizde:</p>
 </br>
 
-<p><img class="image" src="../static/img/post2_7.jpg"></p></br>
+<p><img class="image" src="../static/img/post2_7.png"></p></br>
 
 <p>&emsp;"...exec...sleep...hello...127.26.152.13...SADFHUHF" alanı göze çarpmakta. Network-based indicator olarak bu lokal ip adresini kullanabiliriz.</p>
 </p>
@@ -167,7 +167,7 @@ Compile timelar arasındaki küçük farktan dolayı iki dosyanın da aynı pake
 <p  class="subject">
 <p>&emsp; Programı "packed" olarak nitelendirmemiz için birçok sebebimiz var. Öncelikle PEiD ile incelediğimizde EP Sectionların UPX0-UPX1-UPX2 şeklinde olduğunu görüyoruz:</p></br>
 
-<p><img class="image" src="../static/img/post2_8.jpg"></p></br>
+<p><img class="image" src="../static/img/post2_8.png"></p></br>
 
 <p  class="subject">
 <p>&emsp;EP Sectiondan UPX packed olduğunu farketmesek bile UPX0'ın SECTION HEADER'ında "Virtual Size" ın 0x4000 fakat "Raw Data Size" ın 0 olduğunu görebiliriz. UPX1 veya UPX2'nin "Virtual Size" veya "Raw Data Size" ını karşılaştırmamamızın sebebi UPX0'ın büyük section olmasıdır. 
@@ -182,7 +182,7 @@ UPX packed olduğunu belirlediğimize göre dosyayı unpack edebiliriz.</p></br>
 
 <p>&emsp;Unpack ettikten sonra programı tekrar incelediğimizde "wininet.dll" i görebiliyoruz. İnternete olan bağlantımızın bu kısımda sağlandığını anlıyoruz. Ayrıca import edilen fonksiyonlarda advapi32.dll'de bulunmakta.</p>
 </br>
-<p><img class="image" src="../static/img/post2_10.jpg"></p></br>
+<p><img class="image" src="../static/img/post2_10.png"></p></br>
 <p>&emsp;advapi32.dll'in servis oluşturmak için kullanıldığını öğrenmiş olduk. Stringlere baktığımızda ise "www.malwareanalysisbook.com" URL'inin oluşturulan servis sayesinde wininet.dll ile açılacağı çıkarımını yapabiliriz.</p>
 </p>
 </br>
@@ -193,7 +193,7 @@ UPX packed olduğunu belirlediğimize göre dosyayı unpack edebiliriz.</p></br>
 
 <p>&emsp;LAB 1-2 de bulunan ikinci soru ile aynı soru. PEview ile incelediğimizde "FSG 1.0 -> dulek/xt" ile compile edildiğini görebiliyoruz.</p>
 </br>
-<p><img class="image" src="../static/img/post2_11.jpg"></p></br>
+<p><img class="image" src="../static/img/post2_11.png"></p></br>
 <p>&emsp;FSG'yi manuel olarak OEP bularak veya Joe Stewart'ın OllyBonE'sini kullanarak unpack edebilirsiniz. 
 <strong>{http://www.joestewart.org/ollybone/}</strong></p>
 </p>
@@ -205,13 +205,13 @@ UPX packed olduğunu belirlediğimize göre dosyayı unpack edebiliriz.</p></br>
 
 <p>&emsp;Resource Hacker kullanarak malware'i açalım.</p>
 </br>
-<p><img class="image" src="../static/img/post2_12.jpg"></p></br>
+<p><img class="image" src="../static/img/post2_12.png"></p></br>
 <p>&emsp;Tek kaynağımızın olduğu gözükmekte. Kaynağı incelediğimizde binary data içerisinde "This program cannot be run in DOS mode." stringini görebiliriz. Tüm Portable Executable(PE) dosya içerisinde bu DOS header'ı bulunmaktadır. Buradan anladığımız üzere kaynak ekstra bir executable dosya içermekte. Kaynağı dışa çıkaralım ve daha rahat inceleyelim.</p>
 </br>
 <p><img class="image" src="../static/img/post2_13.jpg"></p></br>
 <p>&emsp;Dışa çıkardığımız kaynağı PEview kullanarak açalım. SECTION .rdata'yı incelediğimizde URLDownloadToFile fonksiyonunun çağırıldığını görebiliriz.</p>
 </br>
-<p><img class="image" src="../static/img/post2_14.jpg"></p></br>
+<p><img class="image" src="../static/img/post2_14.png"></p></br>
 <p>&emsp;Peki bu fonksiyon ne için kullanılıyor? SECTION .data'da bulduğumuz "http.//www.practicalmalwareanalysis.com/updater.exe" nin indirilmesi için.</p></br>
 İlk Chapter olan Statik Analiz'e giriş yapmak adına güzel lablardı.
 </p>
